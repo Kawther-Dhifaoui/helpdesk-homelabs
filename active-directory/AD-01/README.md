@@ -47,7 +47,8 @@ Both adapters were bound to a reconfigured **Host-Only Ethernet Adapter #2** wit
 - Assigned static IPv4 addressing (`192.168.1.10 /24`, gateway `192.168.1.1`, DNS `127.0.0.1`) before installing any role
 - Renamed the host to `DC1` and restarted to apply the change
 
-(../screenshot/03-dc1-static-ip.png)
+![Static IP Configuration](../../screenshots/03-dc1-static-ip.png)
+
 
 
 
