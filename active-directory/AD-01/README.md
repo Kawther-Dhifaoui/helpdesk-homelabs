@@ -57,22 +57,22 @@ Both adapters were bound to a reconfigured **Host-Only Ethernet Adapter #2** wit
 ### 3.3 Custom Forest Rebuild — Personal Branding
 To move beyond a copy-paste tutorial result, I demoted DC1 out of the `corp.local` forest (destroying it), then re-ran the "Add a new forest" wizard and rebuilt a clean forest under my own name: **`kawther-dhifaoui.local`**.
 
-![AD DS Configuration Wizard — new forest kawther-dhifaoui.local](./screenshots/05-new-forest-wizard.png)
+![AD DS Configuration Wizard — new forest kawther-dhifaoui.local](../screenshots/05-new-forest-wizard.png)
 
 Windows automatically generated a NetBIOS (short) name for the domain. Because Windows enforces a hard **15-character limit** on NetBIOS names, the 20-character label `kawther-dhifaoui` was truncated at the logon screen to `KAWTHER-DHIFAOU`. This is documented in the Troubleshooting Log (Issue #1) below.
 
-![Logon screen showing truncated NetBIOS label KAWTHER-DHIFAOU](./screenshots/06-netbios-truncated-logon.png)
+![Logon screen showing truncated NetBIOS label KAWTHER-DHIFAOU](../screenshots/06-netbios-truncated-logon.png)
 
 ### 3.4 Client Preparation & Domain Join
 - Built CLIENT1 as a Windows 11 VM on the same reconfigured Host-Only network as DC1
 - Applied static IPv4 addressing (`192.168.1.20 /24`, gateway `192.168.1.1`, DNS `192.168.1.10`)
 - Verified reachability with `ping 192.168.1.10` and `ping DC1.kawther-dhifaoui.local` before attempting the join
 
-![CLIENT1 IPv4 config, DNS pointed to 192.168.1.10](./screenshots/08-client1-static-ip.png)
+![CLIENT1 IPv4 config, DNS pointed to 192.168.1.10](../screenshots/08-client1-static-ip.png)
 
 - Joined CLIENT1 to `kawther-dhifaoui.local` via System Properties → Change → Domain, authenticating with the full UPN `Administrator@kawther-dhifaoui.local`
 
-![Welcome to the kawther-dhifaoui.local domain dialog](./screenshots/09-domain-join-success.png)
+![Welcome to the kawther-dhifaoui.local domain dialog](../screenshots/09-domain-join-success.png)
 
 ---
 
@@ -85,11 +85,11 @@ Windows automatically generated a NetBIOS (short) name for the domain. Because W
 | 3 | Windows 11 installation repeatedly crashed / hung inside the VM during setup | Insufficient virtual CPU allocation and video memory for the Windows 11 installer under VirtualBox's default VM profile | Increased the VM to 3 CPU cores and raised video memory to 128 MB before restarting the installation |
 | 4 | Mouse cursor became unresponsive / frozen inside the VM display after installing the OS | Default VBoxVGA graphics controller has known pointer-integration issues with modern guest OS builds | Changed the graphics controller to VBoxSVGA and installed official Oracle VirtualBox Guest Additions on Windows Server 2022 |
 
-![Failed ping / "Domain Controller could not be contacted" error](./screenshots/10-ping-fail-before-fix.png)
+![Failed ping / "Domain Controller could not be contacted" error](../screenshots/10-ping-fail-before-fix.png)
 
-![VirtualBox Host Network Manager — Adapter #2 reconfigured](./screenshots/02-hostonly-adapter-fix.png)
+![VirtualBox Host Network Manager — Adapter #2 reconfigured](../screenshots/02-hostonly-adapter-fix.png)
 
-![VM Display settings — VBoxSVGA controller + Guest Additions installed](./screenshots/11-vboxsvga-guest-additions.png)
+![VM Display settings — VBoxSVGA controller + Guest Additions installed](../screenshots/11-vboxsvga-guest-additions.png)
 
 ---
 
@@ -99,11 +99,11 @@ Windows automatically generated a NetBIOS (short) name for the domain. Because W
 - On DC1, the Active Directory Users and Computers (ADUC) console was opened and the `kawther-dhifaoui.local` tree was expanded to the built-in **Computers** OU
 - CLIENT1 appeared registered as a secure computer object inside the Computers OU, confirming a fully successful, end-to-end domain join
 
-![ADUC console — kawther-dhifaoui.local → Computers OU showing CLIENT1](./screenshots/12-aduc-client1-registered.png)
+![ADUC console — kawther-dhifaoui.local → Computers OU showing CLIENT1](../screenshots/12-aduc-client1-registered.png)
 
 Additional health verification was performed with `Get-ADDomain`, `Get-ADComputer -Filter *`, and `dcdiag /test:dns` on DC1, confirming both machines were correctly registered and DNS resolution was fully functional.
 
-![PowerShell — Get-ADComputer -Filter * listing DC1 and CLIENT1](./screenshots/13-get-adcomputer-output.png)
+![PowerShell — Get-ADComputer -Filter * listing DC1 and CLIENT1](../screenshots/13-get-adcomputer-output.png)
 
 ---
 
