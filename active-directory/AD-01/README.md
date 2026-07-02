@@ -47,7 +47,9 @@ Both adapters were bound to a reconfigured **Host-Only Ethernet Adapter #2** wit
 - Assigned static IPv4 addressing (`192.168.1.10 /24`, gateway `192.168.1.1`, DNS `127.0.0.1`) before installing any role
 - Renamed the host to `DC1` and restarted to apply the change
 
-![Server IPv4 static configuration on DC1](./screenshots/03-dc1-static-ip.png)
+(../screenshot/03-dc1-static-ip.png)
+
+
 
 ### 3.2 AD DS Installation & Initial Promotion
 - Installed the Active Directory Domain Services role via Server Manager
