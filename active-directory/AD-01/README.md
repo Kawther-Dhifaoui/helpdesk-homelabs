@@ -57,7 +57,7 @@ Both adapters were bound to a reconfigured **Host-Only Ethernet Adapter #2** wit
 ### 3.3 Custom Forest Rebuild — Personal Branding
 To move beyond a copy-paste tutorial result, I demoted DC1 out of the `corp.local` forest (destroying it), then re-ran the "Add a new forest" wizard and rebuilt a clean forest under my own name: **`kawther-dhifaoui.local`**.
 
-![AD DS Configuration Wizard — new forest kawther-dhifaoui.local](../screenshots/05-new-forest-wizard.png)
+![AD DS Configuration Wizard — new forest kawther-dhifaoui.local](../screenshots/1.2.png)
 
 Windows automatically generated a NetBIOS (short) name for the domain. Because Windows enforces a hard **15-character limit** on NetBIOS names, the 20-character label `kawther-dhifaoui` was truncated at the logon screen to `KAWTHER-DHIFAOU`. This is documented in the Troubleshooting Log (Issue #1) below.
 
@@ -85,7 +85,7 @@ Windows automatically generated a NetBIOS (short) name for the domain. Because W
 | 3 | Windows 11 installation repeatedly crashed / hung inside the VM during setup | Insufficient virtual CPU allocation and video memory for the Windows 11 installer under VirtualBox's default VM profile | Increased the VM to 3 CPU cores and raised video memory to 128 MB before restarting the installation |
 | 4 | Mouse cursor became unresponsive / frozen inside the VM display after installing the OS | Default VBoxVGA graphics controller has known pointer-integration issues with modern guest OS builds | Changed the graphics controller to VBoxSVGA and installed official Oracle VirtualBox Guest Additions on Windows Server 2022 |
 
-![Failed ping / "Domain Controller could not be contacted" error](../screenshots/10-ping-fail-before-fix.png)
+![Failed ping / "Domain Controller could not be contacted" error](../screenshots/1.4.png)
 
 ![VirtualBox Host Network Manager — Adapter #2 reconfigured](../screenshots/02-hostonly-adapter-fix.png)
 
